@@ -3,6 +3,8 @@ import "./styles.css";
 
 import image0 from "./assets/images/0.jpg";
 
+import {lettersArray} from "./data/letters";
+
 export const App = () => {
 	return (
 		<>
@@ -30,29 +32,9 @@ export const App = () => {
 							<img src={image0} alt="Hangman0" className="hangman-img" />
 						</div>
 						<div className="button-container">
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
-							<button className="button">a</button>
+							{lettersArray.map((letter) => (
+								<button className="button">{letter}</button>
+							))}
 						</div>
 					</section>
 					<div>
