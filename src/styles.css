@@ -1,0 +1,58 @@
+.container {
+	margin: auto;
+	max-width: 1200px;
+}
+
+.title {
+	padding: 1rem;
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
+.game-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.word-wrapper {
+	display: flex;
+	flex-direction: row;
+	gap: 1.5rem;
+	margin-bottom: 2rem;
+}
+
+.letter-border {
+	border-bottom: 1px solid black;
+}
+
+.game-status-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 3rem;
+	width: 100%;
+	margin-bottom: 2rem;
+}
+
+.hangman-img {
+	width: 300px;
+	height: 400px;
+}
+
+.button-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	max-width: 780px;
+}
+
+.button {
+	margin: 0.6rem;
+	padding: 1.5rem;
+	height: fit-content;
+	border-radius: 0.5rem;
+	border: 1px solid black;
+}
