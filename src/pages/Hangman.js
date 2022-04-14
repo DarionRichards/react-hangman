@@ -1,7 +1,12 @@
-// import {useState} from "react";
 import {useState} from "react";
 
 import image0 from "../assets/images/0.jpg";
+import image1 from "../assets/images/1.jpg";
+import image2 from "../assets/images/2.jpg";
+import image3 from "../assets/images/3.jpg";
+import image4 from "../assets/images/4.jpg";
+import image5 from "../assets/images/5.jpg";
+import image6 from "../assets/images/6.jpg";
 
 import {lettersArray} from "../data/letters";
 import {PROGRAMING_LANG} from "../data/words";
@@ -16,12 +21,25 @@ export const Hangman = () => {
 	const [showStartButton, setShowStartButton] = useState(true);
 	const [correctWord, setCorrectWord] = useState();
 	const [currentUserGuess, setCurrentUserGuess] = useState(new Set());
-	const [numberOfGuesses, setNumberOfGuesses] = useState(0);
+	const [incorrect, setIncorrect] = useState(0);
+
+	console.log(correctWord);
+	console.log(incorrect);
+
+	const images = [image0, image1, image2, image3, image4, image5, image6];
 
 	const showGuess = () =>
 		correctWord
 			.split("")
 			.map((letter) => (currentUserGuess.has(letter) ? letter : "_"));
+
+	const handleGuess = (value) => {
+		const result = correctWord.split("").find((element) => value === element);
+
+		if (!result) {
+			setIncorrect(incorrect + 1);
+		}
+	};
 
 	return (
 		<>
@@ -37,7 +55,11 @@ export const Hangman = () => {
 							</section>
 							<section className="game-status-wrapper">
 								<div>
-									<img src={image0} alt="Hangman0" className="hangman-img" />
+									<img
+										src={images[incorrect]}
+										alt="Hangman0"
+										className="hangman-img"
+									/>
 								</div>
 								<div className="button-container">
 									{lettersArray.map((letter, i) => (
@@ -50,7 +72,7 @@ export const Hangman = () => {
 													(previousState) =>
 														new Set([...previousState, e.target.value])
 												);
-												setNumberOfGuesses(numberOfGuesses + 1);
+												handleGuess(e.target.value);
 											}}
 										>
 											{letter}
