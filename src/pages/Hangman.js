@@ -1,5 +1,6 @@
 // import {useState} from "react";
 import {useState} from "react";
+
 import image0 from "../assets/images/0.jpg";
 
 import {lettersArray} from "../data/letters";
@@ -15,18 +16,12 @@ export const Hangman = () => {
 	const [showStartButton, setShowStartButton] = useState(true);
 	const [correctWord, setCorrectWord] = useState();
 	const [currentUserGuess, setCurrentUserGuess] = useState(new Set());
-
-	console.log("Correct Word: ", correctWord);
-	console.log("User Guess: ", currentUserGuess);
+	const [numberOfGuesses, setNumberOfGuesses] = useState(0);
 
 	const showGuess = () =>
 		correctWord
 			.split("")
 			.map((letter) => (currentUserGuess.has(letter) ? letter : "_"));
-
-	const handleGuess = (guess) => {
-		setCurrentUserGuess((previousState) => new Set([...previousState, guess]));
-	};
 
 	return (
 		<>
@@ -51,7 +46,11 @@ export const Hangman = () => {
 											className="button"
 											value={letter}
 											onClick={(e) => {
-												handleGuess(e.target.value);
+												setCurrentUserGuess(
+													(previousState) =>
+														new Set([...previousState, e.target.value])
+												);
+												setNumberOfGuesses(numberOfGuesses + 1);
 											}}
 										>
 											{letter}
