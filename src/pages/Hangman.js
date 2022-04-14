@@ -17,11 +17,16 @@ export const Hangman = () => {
 	const [currentUserGuess, setCurrentUserGuess] = useState(new Set());
 
 	console.log("Correct Word: ", correctWord);
+	console.log("User Guess: ", currentUserGuess);
 
 	const showGuess = () =>
 		correctWord
 			.split("")
 			.map((letter) => (currentUserGuess.has(letter) ? letter : "_"));
+
+	const handleGuess = (guess) => {
+		setCurrentUserGuess((previousState) => new Set([...previousState, guess]));
+	};
 
 	return (
 		<>
@@ -41,7 +46,14 @@ export const Hangman = () => {
 								</div>
 								<div className="button-container">
 									{lettersArray.map((letter, i) => (
-										<button key={i} className="button">
+										<button
+											key={i}
+											className="button"
+											value={letter}
+											onClick={(e) => {
+												handleGuess(e.target.value);
+											}}
+										>
 											{letter}
 										</button>
 									))}
