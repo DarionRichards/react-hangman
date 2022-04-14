@@ -11,8 +11,17 @@ const randomWord = () => {
 
 export const Hangman = () => {
 	const [gameStarted, setGameStarted] = useState(false);
+	const [inProgress, setInProgress] = useState(false);
 	const [showStartButton, setShowStartButton] = useState(true);
-	const [answer, setAnswer] = useState("");
+	const [correctWord, setCorrectWord] = useState();
+	const [currentUserGuess, setCurrentUserGuess] = useState(new Set());
+
+	console.log("Correct Word: ", correctWord);
+
+	const showGuess = () =>
+		correctWord
+			.split("")
+			.map((letter) => (currentUserGuess.has(letter) ? letter : "_"));
 
 	return (
 		<>
@@ -24,7 +33,7 @@ export const Hangman = () => {
 					{gameStarted && (
 						<>
 							<section className="word-wrapper">
-								<h2>{answer} </h2>
+								<h2>{inProgress ? showGuess() : correctWord} </h2>
 							</section>
 							<section className="game-status-wrapper">
 								<div>
@@ -32,7 +41,7 @@ export const Hangman = () => {
 								</div>
 								<div className="button-container">
 									{lettersArray.map((letter, i) => (
-										<button className="button" key={i}>
+										<button key={i} className="button">
 											{letter}
 										</button>
 									))}
@@ -45,8 +54,9 @@ export const Hangman = () => {
 							<button
 								className="button"
 								onClick={(e) => {
-									setAnswer(randomWord());
+									setCorrectWord(randomWord());
 									setGameStarted(true);
+									setInProgress(true);
 									setShowStartButton(false);
 								}}
 							>
@@ -56,7 +66,7 @@ export const Hangman = () => {
 							<button
 								className="button"
 								onClick={(e) => {
-									setAnswer(randomWord());
+									setCorrectWord(randomWord());
 								}}
 							>
 								Reset Game
