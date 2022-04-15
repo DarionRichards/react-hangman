@@ -24,7 +24,6 @@ export const Hangman = () => {
 	const [incorrect, setIncorrect] = useState(0);
 
 	console.log(correctWord);
-	console.log(incorrect);
 
 	const images = [image0, image1, image2, image3, image4, image5, image6];
 
@@ -34,12 +33,16 @@ export const Hangman = () => {
 			.map((letter) => (currentUserGuess.has(letter) ? letter : "_"));
 
 	const handleGuess = (value) => {
+		setCurrentUserGuess((previousState) => new Set([...previousState, value]));
+
 		const result = correctWord.split("").find((element) => value === element);
 
 		if (!result) {
 			setIncorrect(incorrect + 1);
 		}
 	};
+
+	console.log(incorrect);
 
 	return (
 		<>
@@ -68,10 +71,6 @@ export const Hangman = () => {
 											className="button"
 											value={letter}
 											onClick={(e) => {
-												setCurrentUserGuess(
-													(previousState) =>
-														new Set([...previousState, e.target.value])
-												);
 												handleGuess(e.target.value);
 											}}
 										>
