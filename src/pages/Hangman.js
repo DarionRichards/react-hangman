@@ -99,6 +99,8 @@ export const Hangman = () => {
 								className="button"
 								onClick={(e) => {
 									setCorrectWord(randomWord());
+									setCurrentUserGuess(new Set());
+									setIncorrect(0);
 								}}
 							>
 								Reset Game
