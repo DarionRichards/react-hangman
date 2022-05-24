@@ -20,7 +20,7 @@ export const Hangman = () => {
 	const [inProgress, setInProgress] = useState(false);
 	const [showStartButton, setShowStartButton] = useState(true);
 	const [correctWord, setCorrectWord] = useState();
-	const [currentUserGuess, setCurrentUserGuess] = useState(new Set());
+	const [currentUserGuess, setCurrentUserGuess] = useState([]);
 	const [incorrect, setIncorrect] = useState(0);
 	const [wordChosen, setWordChosen] = useState([]);
 	const [gameOver, setGameOver] = useState(false);
@@ -30,10 +30,10 @@ export const Hangman = () => {
 	const showGuess = () =>
 		correctWord
 			.split("")
-			.map((letter) => (currentUserGuess.has(letter) ? letter : "_"));
+			.map((letter) => (currentUserGuess.includes(letter) ? letter : "_"));
 
 	const handleGuess = (value) => {
-		setCurrentUserGuess((previousState) => new Set([...previousState, value]));
+		setCurrentUserGuess([...currentUserGuess, value]);
 		setWordChosen([...wordChosen, value]);
 
 		if (lettersArray.includes(value)) {
@@ -114,7 +114,7 @@ export const Hangman = () => {
 									setGameStarted(true);
 									setGameOver(false);
 									setCorrectWord(randomWord());
-									setCurrentUserGuess(new Set());
+									setCurrentUserGuess([]);
 									setIncorrect(0);
 									setWordChosen([]);
 								}}
