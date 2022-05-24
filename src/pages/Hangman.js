@@ -103,6 +103,7 @@ export const Hangman = () => {
 									setCorrectWord(randomWord());
 									setCurrentUserGuess(new Set());
 									setIncorrect(0);
+									setWordChosen([]);
 								}}
 							>
 								Reset Game
