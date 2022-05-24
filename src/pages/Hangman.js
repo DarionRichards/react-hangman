@@ -23,6 +23,7 @@ export const Hangman = () => {
 	const [currentUserGuess, setCurrentUserGuess] = useState(new Set());
 	const [incorrect, setIncorrect] = useState(0);
 	const [wordChosen, setWordChosen] = useState([]);
+	const [gameOver, setGameOver] = useState(false);
 
 	const images = [image0, image1, image2, image3, image4, image5, image6];
 
@@ -42,6 +43,11 @@ export const Hangman = () => {
 
 		if (!result) {
 			setIncorrect(incorrect + 1);
+		}
+
+		if (incorrect >= 5) {
+			// setGameStarted(false);
+			setGameOver(true);
 		}
 	};
 
@@ -83,6 +89,11 @@ export const Hangman = () => {
 							</section>
 						</>
 					)}
+					{gameOver && (
+						<>
+							<h1>Game Over</h1>
+						</>
+					)}
 					<section>
 						{showStartButton ? (
 							<button
@@ -100,6 +111,8 @@ export const Hangman = () => {
 							<button
 								className="button"
 								onClick={(e) => {
+									setGameStarted(true);
+									setGameOver(false);
 									setCorrectWord(randomWord());
 									setCurrentUserGuess(new Set());
 									setIncorrect(0);
