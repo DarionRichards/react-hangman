@@ -22,7 +22,6 @@ export const Hangman = () => {
 	const [correctWord, setCorrectWord] = useState();
 	const [currentUserGuess, setCurrentUserGuess] = useState([]);
 	const [incorrect, setIncorrect] = useState(0);
-	const [wordChosen, setWordChosen] = useState([]);
 	const [gameOver, setGameOver] = useState(false);
 
 	const images = [image0, image1, image2, image3, image4, image5, image6];
@@ -34,7 +33,6 @@ export const Hangman = () => {
 
 	const handleGuess = (value) => {
 		setCurrentUserGuess([...currentUserGuess, value]);
-		setWordChosen([...wordChosen, value]);
 
 		if (lettersArray.includes(value)) {
 		}
@@ -79,7 +77,7 @@ export const Hangman = () => {
 											key={i}
 											className="button"
 											value={letter}
-											disabled={wordChosen.includes(letter)}
+											disabled={currentUserGuess.includes(letter)}
 											onClick={(e) => {
 												handleGuess(e.target.value);
 											}}
@@ -116,7 +114,6 @@ export const Hangman = () => {
 									setCorrectWord(randomWord());
 									setCurrentUserGuess([]);
 									setIncorrect(0);
-									setWordChosen([]);
 									setGameStarted(true);
 									setGameOver(false);
 								}}
