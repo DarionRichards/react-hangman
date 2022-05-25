@@ -38,18 +38,39 @@ export const Hangman = () => {
 		}
 
 		const result = correctWord.split("").find((element) => value === element);
-
 		if (!result) {
 			setIncorrect(incorrect + 1);
 		}
 	};
 
+	useEffect(() => {}, [incorrect]);
+
 	useEffect(() => {
+		const handleKeyDownGuess = (e) => {
+			if (!currentUserGuess.includes(e.key)) {
+				setCurrentUserGuess([...currentUserGuess, e.key]);
+
+				const result = correctWord
+					.split("")
+					.find((element) => e.key === element);
+				if (!result) {
+					setIncorrect(incorrect + 1);
+				}
+			}
+		};
+
+		document.addEventListener("keydown", handleKeyDownGuess);
+
+		console.log(currentUserGuess);
 		if (incorrect >= 6) {
 			setGameStarted(false);
 			setGameOver(true);
 		}
-	}, [incorrect]);
+
+		return () => {
+			document.removeEventListener("keydown", handleKeyDownGuess);
+		};
+	}, [currentUserGuess, correctWord, incorrect]);
 
 	return (
 		<>
