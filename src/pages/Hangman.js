@@ -34,43 +34,33 @@ export const Hangman = () => {
 	const handleGuess = (value) => {
 		setCurrentUserGuess([...currentUserGuess, value]);
 
-		if (lettersArray.includes(value)) {
-		}
-
-		const result = correctWord.split("").find((element) => value === element);
-		if (!result) {
+		if (!correctWord.split("").find((element) => value === element)) {
 			setIncorrect(incorrect + 1);
 		}
 	};
 
-	useEffect(() => {}, [incorrect]);
+	// eslint-disable-next-line
+	const handleKeyDownGuess = (e) => {
+		if (!currentUserGuess.includes(e.key)) {
+			setCurrentUserGuess([...currentUserGuess, e.key]);
+
+			if (!correctWord.split("").find((element) => e.key === element)) {
+				setIncorrect(incorrect + 1);
+			}
+		}
+	};
 
 	useEffect(() => {
-		const handleKeyDownGuess = (e) => {
-			if (!currentUserGuess.includes(e.key)) {
-				setCurrentUserGuess([...currentUserGuess, e.key]);
-
-				const result = correctWord
-					.split("")
-					.find((element) => e.key === element);
-				if (!result) {
-					setIncorrect(incorrect + 1);
-				}
-			}
-		};
-
-		document.addEventListener("keydown", handleKeyDownGuess);
-
-		console.log(currentUserGuess);
 		if (incorrect >= 6) {
 			setGameStarted(false);
 			setGameOver(true);
 		}
 
+		document.addEventListener("keydown", handleKeyDownGuess);
 		return () => {
 			document.removeEventListener("keydown", handleKeyDownGuess);
 		};
-	}, [currentUserGuess, correctWord, incorrect]);
+	}, [incorrect, handleKeyDownGuess]);
 
 	return (
 		<>
