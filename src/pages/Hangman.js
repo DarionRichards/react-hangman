@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import image0 from "../assets/images/0.jpg";
 import image1 from "../assets/images/1.jpg";
@@ -44,12 +44,14 @@ export const Hangman = () => {
 		if (!result) {
 			setIncorrect(incorrect + 1);
 		}
+	};
 
-		if (incorrect >= 5) {
-			// setGameStarted(false);
+	useEffect(() => {
+		if (incorrect >= 6) {
+			setGameStarted(false);
 			setGameOver(true);
 		}
-	};
+	}, [incorrect]);
 
 	return (
 		<>
@@ -111,12 +113,12 @@ export const Hangman = () => {
 							<button
 								className="button"
 								onClick={(e) => {
-									setGameStarted(true);
-									setGameOver(false);
 									setCorrectWord(randomWord());
 									setCurrentUserGuess([]);
 									setIncorrect(0);
 									setWordChosen([]);
+									setGameStarted(true);
+									setGameOver(false);
 								}}
 							>
 								Reset Game
