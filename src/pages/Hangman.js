@@ -41,11 +41,13 @@ export const Hangman = () => {
 
 	// eslint-disable-next-line
 	const handleKeyDownGuess = (e) => {
-		if (!currentUserGuess.includes(e.key)) {
-			setCurrentUserGuess([...currentUserGuess, e.key]);
+		if (e.keyCode >= 65 && e.keyCode <= 90) {
+			if (!currentUserGuess.includes(e.key)) {
+				setCurrentUserGuess([...currentUserGuess, e.key]);
 
-			if (!correctWord.split("").find((element) => e.key === element)) {
-				setIncorrect(incorrect + 1);
+				if (!correctWord.split("").find((element) => e.key === element)) {
+					setIncorrect(incorrect + 1);
+				}
 			}
 		}
 	};
