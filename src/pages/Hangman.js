@@ -59,10 +59,29 @@ export const Hangman = () => {
 		}
 
 		document.addEventListener("keydown", handleKeyDownGuess);
+
+		if (gameStarted) {
+			const result = correctWord.split("").every((element) => {
+				return currentUserGuess.includes(element);
+			});
+
+			if (result) {
+				setGameStarted(false);
+			}
+		}
+
 		return () => {
 			document.removeEventListener("keydown", handleKeyDownGuess);
 		};
-	}, [incorrect, handleKeyDownGuess]);
+	}, [
+		incorrect,
+		handleKeyDownGuess,
+		correctWord,
+		currentUserGuess,
+		gameStarted,
+	]);
+
+	console.log(correctWord);
 
 	return (
 		<>
