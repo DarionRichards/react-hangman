@@ -17,7 +17,6 @@ const randomWord = () => {
 
 export const Hangman = () => {
 	const [gameStarted, setGameStarted] = useState(false);
-	const [inProgress, setInProgress] = useState(false);
 	const [showStartButton, setShowStartButton] = useState(true);
 	const [correctWord, setCorrectWord] = useState();
 	const [currentUserGuess, setCurrentUserGuess] = useState([]);
@@ -26,7 +25,7 @@ export const Hangman = () => {
 
 	const images = [image0, image1, image2, image3, image4, image5, image6];
 
-	const showGuess = () =>
+	const handleWordDisplay = () =>
 		correctWord
 			.split("")
 			.map((letter) => (currentUserGuess.includes(letter) ? letter : "_"));
@@ -81,8 +80,6 @@ export const Hangman = () => {
 		gameStarted,
 	]);
 
-	console.log(correctWord);
-
 	return (
 		<>
 			<header className="title">
@@ -93,7 +90,7 @@ export const Hangman = () => {
 					{gameStarted && (
 						<>
 							<section className="word-wrapper">
-								<h2>{inProgress ? showGuess() : correctWord} </h2>
+								<h2>{handleWordDisplay()} </h2>
 							</section>
 							<section className="game-status-wrapper">
 								<div>
@@ -133,7 +130,6 @@ export const Hangman = () => {
 								onClick={(e) => {
 									setCorrectWord(randomWord());
 									setGameStarted(true);
-									setInProgress(true);
 									setShowStartButton(false);
 								}}
 							>
