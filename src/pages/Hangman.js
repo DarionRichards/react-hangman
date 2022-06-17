@@ -28,13 +28,19 @@ export const Hangman = () => {
 
 	const handleWordDisplay = () =>
 		correctWord
+			.toUpperCase()
 			.split("")
 			.map((letter) => (currentUserGuess.includes(letter) ? letter : "_"));
 
 	const handleGuess = (value) => {
 		setCurrentUserGuess([...currentUserGuess, value]);
 
-		if (!correctWord.split("").find((element) => value === element)) {
+		if (
+			!correctWord
+				.toUpperCase()
+				.split("")
+				.find((element) => value === element)
+		) {
 			setIncorrect(incorrect + 1);
 		}
 	};
@@ -42,19 +48,22 @@ export const Hangman = () => {
 	// eslint-disable-next-line
 	const handleKeyDownGuess = (e) => {
 		if (e.keyCode >= 65 && e.keyCode <= 90) {
-			if (!currentUserGuess.includes(e.key)) {
-				setCurrentUserGuess([...currentUserGuess, e.key]);
-
-				if (!correctWord.split("").find((element) => e.key === element)) {
-					setIncorrect(incorrect + 1);
-				}
+			if (!currentUserGuess.includes(e.key.toUpperCase())) {
+				setCurrentUserGuess([...currentUserGuess, e.key.toUpperCase()]);
+			}
+			if (
+				!correctWord
+					.split("")
+					.find((element) => e.key.toUpperCase() === element)
+			) {
+				setIncorrect(incorrect + 1);
 			}
 		}
 	};
 
-	useEffect(() => {
-		document.addEventListener("keydown", handleKeyDownGuess);
+	console.log(correctWord);
 
+	useEffect(() => {
 		// Handle Loss
 		if (incorrect >= 6) {
 			setGameStarted(false);
@@ -63,9 +72,15 @@ export const Hangman = () => {
 
 		// Handle Win
 		if (gameStarted) {
-			const result = correctWord.split("").every((element) => {
-				return currentUserGuess.includes(element);
-			});
+			document.addEventListener("keydown", handleKeyDownGuess);
+
+			const result = correctWord
+				.toUpperCase()
+				.split("")
+				.every((element) => {
+					// return result as boolean
+					return currentUserGuess.includes(element);
+				});
 
 			if (result) {
 				setGameStarted(false);
@@ -137,7 +152,7 @@ export const Hangman = () => {
 							<button
 								className="button"
 								onClick={(e) => {
-									setCorrectWord(randomWord());
+									setCorrectWord(randomWord().toUpperCase());
 									setGameStarted(true);
 									setShowStartButton(false);
 								}}
@@ -148,7 +163,7 @@ export const Hangman = () => {
 							<button
 								className="button"
 								onClick={(e) => {
-									setCorrectWord(randomWord());
+									setCorrectWord(randomWord().toUpperCase());
 									setCurrentUserGuess([]);
 									setIncorrect(0);
 									setGameStarted(true);
