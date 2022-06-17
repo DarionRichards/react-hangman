@@ -22,6 +22,7 @@ export const Hangman = () => {
 	const [currentUserGuess, setCurrentUserGuess] = useState([]);
 	const [incorrect, setIncorrect] = useState(0);
 	const [gameOver, setGameOver] = useState(false);
+	const [gameWin, setGameWin] = useState(false);
 
 	const images = [image0, image1, image2, image3, image4, image5, image6];
 
@@ -52,13 +53,15 @@ export const Hangman = () => {
 	};
 
 	useEffect(() => {
+		document.addEventListener("keydown", handleKeyDownGuess);
+
+		// Handle Loss
 		if (incorrect >= 6) {
 			setGameStarted(false);
 			setGameOver(true);
 		}
 
-		document.addEventListener("keydown", handleKeyDownGuess);
-
+		// Handle Win
 		if (gameStarted) {
 			const result = correctWord.split("").every((element) => {
 				return currentUserGuess.includes(element);
@@ -66,6 +69,7 @@ export const Hangman = () => {
 
 			if (result) {
 				setGameStarted(false);
+				setGameWin(true);
 			}
 		}
 
@@ -123,6 +127,11 @@ export const Hangman = () => {
 							<h1>Game Over</h1>
 						</>
 					)}
+					{gameWin && (
+						<>
+							<h1>Winner</h1>
+						</>
+					)}
 					<section>
 						{showStartButton ? (
 							<button
@@ -144,6 +153,7 @@ export const Hangman = () => {
 									setIncorrect(0);
 									setGameStarted(true);
 									setGameOver(false);
+									setGameWin(false);
 								}}
 							>
 								Reset Game
