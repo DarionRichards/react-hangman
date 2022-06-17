@@ -1,0 +1,95 @@
+.container {
+	margin: auto;
+	max-width: 1200px;
+}
+
+.title {
+	padding: 1rem;
+	text-align: center;
+}
+
+.game-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.word-wrapper {
+	display: flex;
+	flex-direction: row;
+	gap: 1.5rem;
+	margin-bottom: 2rem;
+}
+
+.letter-border {
+	border-bottom: 1px solid black;
+}
+
+.game-status-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+	width: 100%;
+	margin-bottom: 2rem;
+}
+
+.hangman-img {
+	width: 300px;
+	height: 400px;
+}
+
+.button-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	max-width: 880px;
+}
+
+.button-border {
+	border: 1px solid black;
+	width: 100%;
+}
+
+.button {
+	cursor: pointer;
+	margin: 0.6rem;
+	padding: 1.5rem;
+	height: fit-content;
+	border-radius: 0.5rem;
+	border: solid transparent;
+	color: #ffffff;
+	background-color: #1899d6;
+	font-family: din-round, sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	text-align: center;
+	text-transform: uppercase;
+	touch-action: manipulation;
+	letter-spacing: 0.8px;
+	transition: filter 0.2s;
+	transform: translateZ(0);
+}
+.button:after {
+	background-clip: padding-box;
+	background-color: #1cb0f6;
+	border: solid transparent;
+	border-radius: 16px;
+	border-width: 0 0 4px;
+	bottom: -4px;
+	content: "";
+	position: absolute;
+	z-index: -1;
+}
+
+.button:hover:not(:disabled) {
+	filter: brightness(1.1);
+	-webkit-filter: brightness(1.1);
+}
+
+.button:disabled {
+	cursor: auto;
+	background-color: gray;
+}

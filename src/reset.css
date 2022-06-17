@@ -1,0 +1,23 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	margin: unset;
+	background-color: #e3f2fd;
+	font-family: sans-serif;
+}
+
+h2 {
+	letter-spacing: 1rem;
+}
+
+p {
+	margin-bottom: unset;
+}
