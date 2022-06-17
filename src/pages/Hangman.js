@@ -109,9 +109,6 @@ export const Hangman = () => {
 					{gameStarted && (
 						<>
 							<section className="word-wrapper">
-								<h2>{handleWordDisplay()} </h2>
-							</section>
-							<section className="game-status-wrapper">
 								<div>
 									<img
 										src={images[incorrect]}
@@ -119,6 +116,10 @@ export const Hangman = () => {
 										className="hangman-img"
 									/>
 								</div>
+							</section>
+							<section className="game-status-wrapper">
+								<h2>{handleWordDisplay()} </h2>
+								<div className="button-border"></div>
 								<div className="button-container">
 									{lettersArray.map((letter, i) => (
 										<button
